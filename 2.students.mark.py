@@ -16,6 +16,7 @@ class Students:
     def get_dob(self):
         return self.__dob
 
+
 class Courses:
 
     # initialize data
@@ -23,15 +24,17 @@ class Courses:
         self.__name = str(input("Enter Course's Name: "))
         self.__id = str(input("Enter Course's ID: "))
         self.__mark = int(input("Enter Course's Mark: "))
+
     # encapsulation
     def get_name(self):
         return self.__name
     
     def get_id(self):
         return self.__id
-    
+
     def get_mark(self):
         return self.__mark
+
 
 # use for polymorphism data
 class Data:
@@ -42,10 +45,11 @@ class Data:
 
     # display data
     def display(data):
-        for i,element in enumerate(data,1):
+        for i, element in enumerate(data, 1):
             print(f"Student {i}:")
             print('\n'.join(element))
             print("**********")
+
 
 class Main:
 
@@ -87,7 +91,7 @@ class Main:
                          f"Dob: {Students.get_dob(self)}"])
         print("-----------")
         return temp_std
-        
+
     def set_courses(self):
         Courses.__init__(self)
         temp_crs = []
@@ -96,25 +100,25 @@ class Main:
                          f"Mark: {Courses.get_mark(self)}"))
         print("-----------")
         return temp_crs
-    
+
     # create the student mark list
     def create_list(self):
-        for i in range (self.get_num_of_students()):
+        for i in range(self.get_num_of_students()):
             std = self.set_students()
             self.set_num_of_courses()
             self.__courses = []
-            for i in range (self.get_num_of_courses()):
+            for i in range(self.get_num_of_courses()):
                 self.__courses.append(self.set_courses())
-            temp_list = [(f"Student Info: {std}"),
-                         (f"Course Info: {self.__courses}")]
+            temp_list = [f"Student Info: {std}",
+                         f"Course Info: {self.__courses}"]
             self.__students.append(temp_list)
 
     # display student mark management list
     def list_students(self):
         Data.display(self.__students)
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     # create new object
     main = Main()
 
