@@ -23,15 +23,22 @@ class Courses:
     def __init__(self):
         self.__name = str(input("Enter Course's Name: "))
         self.__id = str(input("Enter Course's ID: "))
-        self.__mark = int(input("Enter Course's Mark: "))
 
     # encapsulation
     def get_name(self):
         return self.__name
-    
+
     def get_id(self):
         return self.__id
 
+
+class Mark:
+
+    # initialize data
+    def __init__(self):
+        self.__mark = int(input("Enter Course's Mark: "))
+
+    # encapsulation
     def get_mark(self):
         return self.__mark
 
@@ -96,8 +103,9 @@ class Main:
         Courses.__init__(self)
         temp_crs = []
         temp_crs.append((f"Name: {Courses.get_name(self)}",
-                         f"ID: {Courses.get_id(self)}",
-                         f"Mark: {Courses.get_mark(self)}"))
+                         f"ID: {Courses.get_id(self)}"))
+        Mark.__init__(self)
+        temp_crs.append(f"Mark: {Mark.get_mark(self)}")
         print("-----------")
         return temp_crs
 
@@ -107,7 +115,7 @@ class Main:
             std = self.set_students()
             self.set_num_of_courses()
             self.__courses = []
-            for i in range(self.get_num_of_courses()):
+            for j in range(self.get_num_of_courses()):
                 self.__courses.append(self.set_courses())
             temp_list = [f"Student Info: {std}",
                          f"Course Info: {self.__courses}"]
