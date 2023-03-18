@@ -1,4 +1,6 @@
 import math
+
+import numpy
 import numpy as np
 
 
@@ -73,10 +75,6 @@ class GPA:
     def gpa_calculating(self):
         self.__gpa = np.average(self.__mark_list)
 
-    # sort gpa in descending order
-    def gpa_sorting(self):
-        self.__mark_list = np.sort(self.__mark_list)[::-1]
-
     # encapsulation
     def get_gpa(self):
         return math.floor(self.__gpa)
@@ -120,7 +118,7 @@ class Main:
         temp_std.append([f"Name: {Students.get_name(self)}",
                          f"ID: {Students.get_id(self)}",
                          f"Dob: {Students.get_dob(self)}"])
-        print("-----------")
+        print("***********")
         return temp_std
 
     def set_courses(self):
@@ -132,6 +130,7 @@ class Main:
 
     # create the student mark list
     def create_list(self):
+        gpa_list = []  # list of all GPA
         for i in range(self.get_num_of_students()):
             std = self.set_students()
             self.set_num_of_courses()
@@ -156,7 +155,20 @@ class Main:
                          f"Course Info: {self.__courses}",
                          f"GPA: {GPA.get_gpa(self)}"]
 
-            self.__students.append(temp_list)
+            # sorting part
+            if len(gpa_list) == 0:
+                self.__students.append(temp_list)
+                gpa_list.append(GPA.get_gpa(self))
+            else:
+                for k in range(len(gpa_list)):
+                    if GPA.get_gpa(self) >= gpa_list[k]:
+                        self.__students.insert(k, temp_list)
+                        gpa_list.insert(k, GPA.get_gpa(self))
+                        break
+                    if GPA.get_gpa(self) <= gpa_list[len(gpa_list)-1]:
+                        self.__students.append(temp_list)
+                        gpa_list.append(GPA.get_gpa(self))
+                        break
 
     # display student mark management list
     def list_students(self):
@@ -172,4 +184,5 @@ if __name__ == "__main__":
 
     main.create_list()
 
+    print("\n__________STUDENT'S LIST IN DESCENDING ORDER OF GPA__________\n")
     main.list_students()
