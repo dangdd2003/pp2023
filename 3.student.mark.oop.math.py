@@ -1,6 +1,4 @@
 import math
-
-import numpy
 import numpy as np
 
 
@@ -43,10 +41,14 @@ class Mark:
     # initialize data
     def __init__(self):
         self.__mark = int(input("Enter Course's Mark: "))
+        self.__credit = int(input("Enter Course's Credit: "))
 
     # encapsulation
     def get_mark(self):
         return self.__mark
+
+    def get_credit(self):
+        return self.__credit
 
 
 # use for polymorphism data
@@ -67,13 +69,14 @@ class Data:
 class GPA:
 
     # initialize data
-    def __init__(self, mark_list):
+    def __init__(self, mark_list, credit_list):
         self.__mark_list = np.array(mark_list)
+        self.__credit_list = np.array(credit_list)
         self.__gpa = 0
 
     # average of gpa
     def gpa_calculating(self):
-        self.__gpa = np.average(self.__mark_list)
+        self.__gpa = np.divide(np.sum(np.multiply(self.__mark_list, self.__credit_list)), np.sum(self.__credit_list))
 
     # encapsulation
     def get_gpa(self):
@@ -131,23 +134,27 @@ class Main:
     # create the student mark list
     def create_list(self):
         gpa_list = []  # list of all GPA
+
         for i in range(self.get_num_of_students()):
             std = self.set_students()
             self.set_num_of_courses()
 
             # create list of courses and mark
             mark_list = []
+            credit_list = []
             self.__courses = []
             for j in range(self.get_num_of_courses()):
                 self.__courses.append(self.set_courses())
                 Mark.__init__(self)
                 temp_mark = Mark.get_mark(self)
+                temp_credit = Mark.get_credit(self)
                 mark_list.append(temp_mark)
-                self.__courses.append(f"Mark: {Mark.get_mark(self)}")
+                credit_list.append(temp_credit)
+                self.__courses.append(f"Credit: {Mark.get_credit(self)}, Mark: {Mark.get_mark(self)}")
                 print("-----------")
 
             # calculating gpa
-            GPA.__init__(self, mark_list)
+            GPA.__init__(self, mark_list, credit_list)
             GPA.gpa_calculating(self)
 
             # create list of students
@@ -165,7 +172,7 @@ class Main:
                         self.__students.insert(k, temp_list)
                         gpa_list.insert(k, GPA.get_gpa(self))
                         break
-                    if GPA.get_gpa(self) <= gpa_list[len(gpa_list)-1]:
+                    if GPA.get_gpa(self) <= gpa_list[len(gpa_list) - 1]:
                         self.__students.append(temp_list)
                         gpa_list.append(GPA.get_gpa(self))
                         break
