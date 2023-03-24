@@ -1,5 +1,5 @@
-from pw6.output import Main
-from pw6.output import data_syncing
+from output import Main
+from output import data_syncing
 
 if __name__ == "__main__":
     # create new object

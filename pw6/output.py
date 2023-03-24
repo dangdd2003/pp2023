@@ -2,8 +2,11 @@ import base64
 import pickle
 import zlib
 
-from pw6.input import Students, Courses, Mark, Data, GPA
-
+from domains.Student import Student
+from domains.Course import Course
+from domains.Mark import Mark
+from domains.GPA import GPA
+from input import Data
 
 class Main:
 
@@ -38,26 +41,26 @@ class Main:
         print("----------")
 
     def set_students(self):
-        Students.__init__(self)
-        temp_std = [[f"Name: {Students.get_name(self)}",
-                     f"ID: {Students.get_id(self)}",
-                     f"Dob: {Students.get_dob(self)}"]]
+        Student.__init__(self)
+        temp_std = [[f"Name: {Student.get_name(self)}",
+                     f"ID: {Student.get_id(self)}",
+                     f"Dob: {Student.get_dob(self)}"]]
 
-        with open("data\\students.txt", "a") as student_file:
-            student_file.write(f"Name: {Students.get_name(self)}\n"
-                               f"ID: {Students.get_id(self)}\n"
-                               f"Dob: {Students.get_dob(self)}\n\n")
+        with open("data\\Students.txt", "a") as student_file:
+            student_file.write(f"Name: {Student.get_name(self)}\n"
+                               f"ID: {Student.get_id(self)}\n"
+                               f"Dob: {Student.get_dob(self)}\n\n")
 
         print("***********")
         return temp_std
 
     def set_courses(self):
-        Courses.__init__(self)
-        temp_crs = [(f"Name: {Courses.get_name(self)}",
-                     f"ID: {Courses.get_id(self)}")]
+        Course.__init__(self)
+        temp_crs = [(f"Name: {Course.get_name(self)}",
+                     f"ID: {Course.get_id(self)}")]
         with open("data\\courses.txt", "a") as course_file:
-            course_file.write(f"Name: {Courses.get_name(self)}\n"
-                              f"ID: {Courses.get_id(self)}\n\n")
+            course_file.write(f"Name: {Course.get_name(self)}\n"
+                              f"ID: {Course.get_id(self)}\n\n")
         return temp_crs
 
     # create the student mark list
@@ -89,7 +92,7 @@ class Main:
                 credit_list.append(temp_credit)
                 self.__courses.append(f"Credit: {Mark.get_credit(self)}, Mark: {Mark.get_mark(self)}")
                 with open("data\\marks.txt", "a") as mark_file:
-                    mark_file.write(f"Course {Courses.get_name(self)}:\n"
+                    mark_file.write(f"Course {Course.get_name(self)}:\n"
                                     f"Mark: {Mark.get_mark(self)}\n"
                                     f"Credit: {Mark.get_credit(self)}\n\n")
                 print("-----------")
