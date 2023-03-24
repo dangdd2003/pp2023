@@ -1,4 +1,8 @@
-from pw4.input import Students, Courses, Mark, Data, GPA
+from domains.Student import Student
+from domains.Course import Course
+from domains.Mark import Mark
+from domains.GPA import GPA
+from input import Data
 
 
 class Main:
@@ -34,19 +38,19 @@ class Main:
         print("----------")
 
     def set_students(self):
-        Students.__init__(self)
+        Student.__init__(self)
         temp_std = []
-        temp_std.append([f"Name: {Students.get_name(self)}",
-                         f"ID: {Students.get_id(self)}",
-                         f"Dob: {Students.get_dob(self)}"])
+        temp_std.append([f"Name: {Student.get_name(self)}",
+                         f"ID: {Student.get_id(self)}",
+                         f"Dob: {Student.get_dob(self)}"])
         print("***********")
         return temp_std
 
     def set_courses(self):
-        Courses.__init__(self)
+        Course.__init__(self)
         temp_crs = []
-        temp_crs.append((f"Name: {Courses.get_name(self)}",
-                         f"ID: {Courses.get_id(self)}"))
+        temp_crs.append((f"Name: {Course.get_name(self)}",
+                         f"ID: {Course.get_id(self)}"))
         return temp_crs
 
     # create the student mark list

@@ -1,4 +1,4 @@
-from pw4.output import Main
+from output import Main
 
 if __name__ == "__main__":
     # create new object
